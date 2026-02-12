@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .header p {
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #fcfcfd;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            background: #fff;
+        }
+
+        button {
+            margin-top: 16px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button:disabled {
+            background-color: #a5b4fc;
+            cursor: not-allowed;
+        }
+
+        .result-area {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #334155;
+            white-space: pre-wrap;
+            min-height: 40px;
+        }
+
+        .loading {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            body { padding: 40px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Intelligence Hub</h1>
+        <p>Precision AI tools for writing, thinking, and learning.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-header">
+                <span class="label">Consultation</span>
+                <h3>Ask Anything</h3>
+            </div>
+            <input type="text" id="askMeAnything" placeholder="What would you like to know?">
+            <button id="btnAksMeAnything">Generate Answer</button>
+            <div id="resultaskMeAnything" class="result-area">Awaiting prompt...</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="label">Summary</span>
+                <h3>Quick Summarizer</h3>
+            </div>
+            <input type="text" id="quickSummerizer" placeholder="Paste complex text here...">
+            <button id="btnquickSummerizer">Process Summary</button>
+            <div id="resultquickSummerizer" class="result-area">Awaiting text...</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="label">Innovation</span>
+                <h3>Idea Spark</h3>
+            </div>
+            <input type="text" id="ideaSpark" placeholder="Enter a subject or field...">
+            <button id="btnideaSpark">Generate Ideas</button>
+            <div id="resultideaSpark" class="result-area">Awaiting topic...</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="label">Definition</span>
+                <h3>Definition Finder</h3>
+            </div>
+            <input type="text" id="definitionFinder" placeholder="Enter word or concept...">
+            <button id="btndefinitionFinder">Lookup Definition</button>
+            <div id="resultdefinitionFinder" class="result-area">Awaiting term...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+     const askMeAnything = document.getElementById("askMeAnything");
+    const btnAksMeAnything = document.getElementById("btnAksMeAnything");
+    const resultaskMeAnything = document.getElementById("resultaskMeAnything");
+
+    const quickSummerizer = document.getElementById("quickSummerizer");
+    const btnquickSummerizer = document.getElementById("btnquickSummerizer");
+    const resultquickSummerizer = document.getElementById("resultquickSummerizer");
+
+    const ideaSpark = document.getElementById("ideaSpark");
+    const btnideaSpark = document.getElementById("btnideaSpark");
+    const resultideaSpark = document.getElementById("resultideaSpark");
+    
+    const definitionFinder = document.getElementById("definitionFinder");
+    const btndefinitionFinder = document.getElementById("btndefinitionFinder");
+    const resultdefinitionFinder = document.getElementById("resultdefinitionFinder");
+
+    async function aiResponses(promptText, targetDiv) {
+        targetDiv.innerText = "Generating Response.....";
+
+        try {
+            const response = await fetch(
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyBumjhr5INreMslehWZ3UucwYL5SLG3PLk", 
+                {
+                    method: "POST",
+                    headers: { "Content-Type" : "application/json" },
+                    body: JSON.stringify({
+                        contents:[
+                            { 
+                                role: "user", 
+                                parts:[{ text: promptText }] }]
+                    })
+                }
+            );
+
+            const data = await response.json(); 
+            const AiOutput = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response found";
+            targetDiv.innerText = AiOutput;
+
+        } catch(error) {
+            targetDiv.innerText = "Something Went Wrong...";
+        }
+    }
+
+    btnAksMeAnything.addEventListener("click", () => {
+        const val = askMeAnything.value.trim();
+        if(!val) return alert("Please enter something...");
+        aiResponses(`You are a user-friendly AI. Answer the following in a simple format without extra fluff and don't use asterics : ${val}`, resultaskMeAnything);
+    });
+
+    btnquickSummerizer.addEventListener("click", () => {
+        const val = quickSummerizer.value.trim();
+        if(!val) return alert("Please enter something...");
+        aiResponses(`You are a user-friendly AI .Summarize this in a simple format in two-three lines and dont use asterics: ${val}`, resultquickSummerizer);
+    });
+
+    btnideaSpark.addEventListener("click", () => {
+        const val = ideaSpark.value.trim();
+        if(!val) return alert("Please enter something...");
+        aiResponses(`You are a user-friendly AI.Generate five ideas for this topic in a simple list format using odered and unordered list type and don't use asterics: ${val}`, resultideaSpark);
+    });
+
+    btndefinitionFinder.addEventListener("click", () => {
+        const val = definitionFinder.value.trim();
+        if(!val) return alert("Please enter something...");
+        aiResponses(`You are a user-friendly AI. Give a simple definition in two-three lines for given topic and don't use asterics: ${val}`, resultdefinitionFinder);
+    });
+</script>
+</body>
+</html>
