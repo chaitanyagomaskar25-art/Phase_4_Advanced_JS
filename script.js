@@ -7,7 +7,7 @@ function openProject(id, url) {
                 
                 setTimeout(() => {
                     window.location.href = url;
-                     btn.innerText = originalText;
+                     btn.innerHTML = originalText;
                 }, 800);
             });
         }
